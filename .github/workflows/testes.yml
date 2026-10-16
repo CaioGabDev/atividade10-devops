@@ -1,0 +1,23 @@
+name: Testes Java
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Executar testes
+        run: mvn test
